@@ -4,12 +4,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var productsRouter = require("./routes/products");
+var AdvertismentRouter = require("./routes/Advertisment");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var mongoose = require("mongoose");
 var session = require("express-session");
+var cors = require("cors");
 var sessionAuth = require("./middleware/sessionAuth");
 var app = express();
+app.use(cors());
 app.use(
   session({
     secret: "keyboard cat",
@@ -33,6 +36,7 @@ app.use(sessionAuth);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
+app.use("/Advertisment", AdvertismentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
